@@ -11,20 +11,58 @@ export const GlareCard = ({
 }) => {
   const isPointerInside = useRef(false);
   const refElement = useRef<HTMLDivElement>(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const isTouchDeviceRef = useRef(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   const state = useRef({
     background: { x: 50, y: 50 },
     rotate: { x: 0, y: 0 },
   });
 
   useEffect(() => {
-    const checkTouch = () => {
-      setIsTouchDevice(
-        typeof window !== "undefined" &&
-        ("ontouchstart" in window || navigator.maxTouchPoints > 0)
-      );
-    };
-    checkTouch();
+    // Detect touch device only once
+    const hasTouchScreen =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window || navigator.maxTouchPoints > 0);
+    
+    isTouchDeviceRef.current = hasTouchScreen;
+    setIsInitialized(true);
+    
+    // Set initial opacity based on device type
+    if (refElement.current) {
+      refElement.current.style.setProperty("--opacity", hasTouchScreen ? "0.5" : "0");
+    }
+    
+    // Add touch event listener immediately after detection
+    const element = refElement.current;
+    if (element && hasTouchScreen) {
+      const handleTouchMove = (e: TouchEvent) => {
+        if (e.touches.length === 0) return;
+        const touch = e.touches[0];
+        const rect = element.getBoundingClientRect();
+        
+        const position = {
+          x: touch.clientX - rect.left,
+          y: touch.clientY - rect.top,
+        };
+        
+        const percentage = {
+          x: (100 / rect.width) * position.x,
+          y: (100 / rect.height) * position.y,
+        };
+
+        const { background } = state.current;
+        background.x = Math.max(0, Math.min(100, 50 + percentage.x / 4 - 12.5));
+        background.y = Math.max(0, Math.min(100, 50 + percentage.y / 3 - 16.67));
+
+        element.style.setProperty("--bg-x", `${background.x}%`);
+        element.style.setProperty("--bg-y", `${background.y}%`);
+      };
+
+      element.addEventListener("touchmove", handleTouchMove, { passive: true });
+      return () => {
+        element.removeEventListener("touchmove", handleTouchMove);
+      };
+    }
   }, []);
 
   const containerStyle = {
@@ -34,7 +72,7 @@ export const GlareCard = ({
     "--bg-y": "50%",
     "--duration": "300ms",
     "--foil-size": "100%",
-    "--opacity": isTouchDevice ? "0.5" : "0",
+    "--opacity": "0.6",
     "--radius": "48px",
     "--easing": "ease",
     "--transition": "var(--duration) var(--easing)",
@@ -71,7 +109,9 @@ export const GlareCard = ({
       )}
       ref={refElement}
       onPointerMove={(event) => {
-        if (isTouchDevice) {
+        if (!isInitialized) return;
+        
+        if (isTouchDeviceRef.current) {
           // On touch devices, only update background position, not rotation
           const rect = event.currentTarget.getBoundingClientRect();
           const position = {
@@ -84,8 +124,8 @@ export const GlareCard = ({
           };
 
           const { background } = state.current;
-          background.x = 50 + percentage.x / 4 - 12.5;
-          background.y = 50 + percentage.y / 3 - 16.67;
+          background.x = Math.max(0, Math.min(100, 50 + percentage.x / 4 - 12.5));
+          background.y = Math.max(0, Math.min(100, 50 + percentage.y / 3 - 16.67));
 
           if (refElement.current) {
             refElement.current.style.setProperty("--bg-x", `${background.x}%`);
@@ -119,7 +159,9 @@ export const GlareCard = ({
         updateStyles();
       }}
       onPointerEnter={() => {
-        if (isTouchDevice) {
+        if (!isInitialized) return;
+        
+        if (isTouchDeviceRef.current) {
           // On touch devices, increase opacity on touch
           if (refElement.current) {
             refElement.current.style.setProperty("--opacity", "0.75");
@@ -138,7 +180,9 @@ export const GlareCard = ({
         }
       }}
       onPointerLeave={() => {
-        if (isTouchDevice) {
+        if (!isInitialized) return;
+        
+        if (isTouchDeviceRef.current) {
           // On touch devices, return to default opacity
           if (refElement.current) {
             refElement.current.style.setProperty("--opacity", "0.5");
