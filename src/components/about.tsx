@@ -10,7 +10,7 @@ export function About() {
   )
 
   const fullAboutText = (
-    <div className="mx-auto max-w-2xl">
+    <div className="mx-auto max-w-2xl pt-4 sm:pt-6">
       <h3 className="mb-8 bg-gradient-to-r from-[#00FFB3] via-[#0077FF] to-[#00FFB3] bg-clip-text text-center font-sans text-3xl font-bold tracking-tight text-transparent drop-shadow-[0_0_12px_rgba(0,255,179,0.6)] sm:text-4xl">
         About Me
       </h3>
@@ -31,7 +31,7 @@ export function About() {
   return (
     <section
       id="about"
-      className="relative mt-16 flex min-h-svh flex-col items-center justify-center overflow-hidden"
+      className="relative mt-16 flex min-h-svh flex-col items-center justify-center overflow-hidden px-3 py-4 sm:px-0 sm:py-0"
     >
       <MaskContainer
         revealText={teaserText}

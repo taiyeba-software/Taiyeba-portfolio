@@ -6,18 +6,18 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden"
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden pt-16 sm:pt-20"
     >
       <GlareCardHero>
 
-        <div className="flex min-h-svh items-center px-6 sm:px-10 lg:px-20 pt-20 sm:pt-16 md:pt-0">
-            <div className="mx-auto grid w-full max-w-7xl grid-cols-1 md:grid-cols-2 items-center">
+        <div className="flex w-full items-center px-6 py-10 sm:px-10 sm:py-12 lg:px-20">
+            <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12">
 
               {/* Left side */}
               <div className="flex flex-col items-center text-center md:items-start md:text-left">
 
                 {/* Main Statement */}
-                  <h1 className="type-h1 mb-8 max-w-3xl xl:text-6xl">
+                  <h1 className="type-h1 mb-6 max-w-3xl text-[clamp(2rem,4.6vw,3.75rem)]">
                     I design and <span className="font-light text-primary" style={{ fontFamily: "var(--font-m-plus-code-latin)" }}>develop()</span>{" "}
                     <span className="font-semibold">
                       products, shape meaningful brands, and build + lead inspired,
@@ -33,13 +33,13 @@ export function Hero() {
               </div>
 
               {/* Right side — 30% width */}
-              <div className="relative flex items-center justify-center md:justify-end m-[10px]">
+              <div className="relative mt-2 flex items-center justify-center lg:mt-0 lg:justify-end">
                 <Image
                   src="/images/profile.png"
                   alt="Profile photo"
                   width={440}
                   height={660}
-                  className="w-full max-w-[590px] lg:max-w-[600px] h-auto object-contain grayscale"
+                  className="h-auto w-[min(88vw,520px)] object-contain grayscale lg:w-[min(42vw,600px)]"
                   priority
                 />
               </div>

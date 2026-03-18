@@ -73,92 +73,72 @@ export const MaskContainer = ({
   className?: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [supportsHover, setSupportsHover] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [viewportSize, setViewportSize] = useState({ width: 0, height: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  const updateMousePosition = (e: MouseEvent) => {
+
+  const updateMousePosition = (e: React.MouseEvent<HTMLDivElement>) => {
     if (containerRef.current) {
       const rect = containerRef.current.getBoundingClientRect();
       setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top });
     }
   };
 
-  const updateTouchPosition = (e: TouchEvent) => {
-    if (containerRef.current && e.touches.length > 0) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const touch = e.touches[0];
-      setMousePosition({ x: touch.clientX - rect.left, y: touch.clientY - rect.top });
-    }
-  };
-
   useEffect(() => {
-    // Detect touch device and viewport size
-    const checkMobile = () => {
-      const hasTouchScreen =
-        (typeof window !== "undefined" &&
-          ("ontouchstart" in window ||
-            (navigator as any).maxTouchPoints > 0)) ||
-        (navigator as any).msMaxTouchPoints > 0;
-      setIsMobile(hasTouchScreen);
-      setViewportSize({ width: window.innerWidth, height: window.innerHeight });
+    const syncInputMode = () => {
+      if (typeof window === "undefined") return;
+      const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+      setSupportsHover(canHover);
     };
 
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
+    syncInputMode();
+    window.addEventListener("resize", syncInputMode);
 
+    return () => {
+      window.removeEventListener("resize", syncInputMode);
+    };
+  }, []);
+
+  useEffect(() => {
     const element = containerRef.current;
     if (!element) return;
 
-    const handleTouchStart = (e: TouchEvent) => {
-      updateTouchPosition(e);
-      setIsHovered(true);
+    const syncCenter = () => {
+      const rect = element.getBoundingClientRect();
+      setMousePosition({ x: rect.width / 2, y: rect.height / 2 });
     };
 
-    const handleTouchMove = (e: TouchEvent) => {
-      updateTouchPosition(e);
-    };
+    syncCenter();
+    window.addEventListener("resize", syncCenter);
 
-    const handleTouchEnd = () => {
+    return () => {
+      window.removeEventListener("resize", syncCenter);
       setIsHovered(false);
     };
+  }, []);
 
-    if (isMobile) {
-      // Mobile: Touch events
-      element.addEventListener("touchstart", handleTouchStart);
-      element.addEventListener("touchmove", handleTouchMove);
-      element.addEventListener("touchend", handleTouchEnd);
-    } else {
-      // Desktop: Mouse events
-      element.addEventListener("mousemove", updateMousePosition);
-    }
-    
-    return () => {
-      window.removeEventListener('resize', checkMobile);
-      if (element) {
-        if (isMobile) {
-          element.removeEventListener("touchstart", handleTouchStart);
-          element.removeEventListener("touchmove", handleTouchMove);
-          element.removeEventListener("touchend", handleTouchEnd);
-        } else {
-          element.removeEventListener("mousemove", updateMousePosition);
-        }
-      }
-    };
-  }, [isMobile]);
-  
-  // Adjust mask size based on viewport for better mobile experience
-  const adjustedRevealSize = viewportSize.width < 768 ? Math.min(revealSize, viewportSize.width * 0.8) : revealSize;
-  const maskSize = isHovered ? adjustedRevealSize : size;
+  const maskSize = isHovered ? revealSize : size;
 
-  // Both mobile and desktop: Use mask reveal effect
+  if (!supportsHover) {
+    return (
+      <div
+        ref={containerRef}
+        className={cn("relative flex min-h-svh w-full items-center justify-center", className)}
+      >
+        <div className="relative z-20 mx-auto w-full max-w-4xl px-6 text-white [&_*]:!text-white sm:px-10 lg:px-20">
+          {children}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <motion.div
       ref={containerRef}
       className={cn("relative h-screen cursor-pointer", className)}
-      onMouseEnter={() => !isMobile && setIsHovered(true)}
-      onMouseLeave={() => !isMobile && setIsHovered(false)}
+      onMouseMove={updateMousePosition}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div
         className="absolute flex h-full w-full items-center justify-center bg-white text-6xl [mask-image:url(/mask.svg)] [mask-repeat:no-repeat]"
