@@ -7,7 +7,7 @@ export const siteConfig = {
   email: "islamtaiyeba38@gmail.com",
   socials: {
     github: "https://github.com/taiyeba-software",
-    linkedin: "https://linkedin.com/in/taiyeba-islam",
+    linkedin: "https://www.linkedin.com/in/taiyeba-islam-7232752a1/",
     twitter: "https://x.com",
   },
   navLinks: [
@@ -46,7 +46,7 @@ export const projectsData: Project[] = [
     description:
       "A layered Node.js + Express backend powering an e-commerce platform. Features JWT authentication, role-based authorization, Redis caching, ImageKit CDN integration, and MongoDB Atlas. Fully deployed on Render with environment-driven configuration.",
     tags: ["Node.js", "Express", "MongoDB", "Redis", "JWT", "Render"],
-    image: "/placeholder.jpg",
+     image: "/projects/rajkonna-backend.png",
     githubLink: "https://github.com/taiyeba-software/Backend-Rajkonna",
     liveDemoLink: "https://backend-rajkonna.onrender.com",
     status: "Live",
@@ -58,8 +58,9 @@ export const projectsData: Project[] = [
     description:
       "A React-based frontend with user authentication, product browsing, cart management, and protected routes. Built with Context API, Tailwind CSS, and integrated with a production-ready backend API.",
     tags: ["React", "React Router", "Tailwind CSS", "Context API"],
-    image: "/placeholder.jpg",
+    image: "/projects/rajkonna-frontend.png",
     githubLink: "https://github.com/taiyeba-software/rajkonna",
+    liveDemoLink: "https://frontend-rajkonna.vercel.app/",
     status: "Live",
   },
   {
@@ -69,8 +70,9 @@ export const projectsData: Project[] = [
     description:
       "A Next.js + TypeScript SaaS application featuring Clerk authentication, Cloudinary AI background removal, MongoDB integration, and typed server actions. Focused on production debugging, environment configuration, and scalable architecture.",
     tags: ["Next.js", "TypeScript", "MongoDB", "Cloudinary", "Clerk"],
-    image: "/placeholder.jpg",
+    image: "/projects/sparklelab.png",
     githubLink: "https://github.com/taiyeba-software/SparkleLab",
+    liveDemoLink: "https://sparkle-lab-mj8z.vercel.app/",
     status: "Live",
   },
   {
@@ -80,8 +82,8 @@ export const projectsData: Project[] = [
     description:
       "VerbaScope is an AI-assisted platform designed to detect early emotional signals in Bangla-English code-mixed social media text during content creation. The system follows a modular microservice architecture with a Next.js frontend, Node.js API layer, and a FastAPI-based ML service for probabilistic sentiment and sarcasm detection. Currently in development as a final-year research project.",
     tags: ["Next.js", "Node.js", "FastAPI", "MongoDB", "NLP", "Microservices"],
-    image: "/verbascape-preview.jpg",
-    githubLink: "#",
+    image: "/projects/verbascope.png",
+    githubLink: "https://github.com/taiyeba-software/verbascope-social-ml",
     liveDemoLink: "#",
     status: "Upcoming",
   }

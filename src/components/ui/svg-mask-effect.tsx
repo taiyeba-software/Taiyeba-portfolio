@@ -56,12 +56,20 @@ export const MaskContainer = ({
   revealText,
   size = 10,
   revealSize = 600,
+  maskTransitionDuration = 0.3,
+  maskTransitionDelay = 0,
+  fadeTransitionDuration = 0.3,
+  fadeTransitionDelay = 0,
   className,
 }: {
   children?: string | React.ReactNode;
   revealText?: string | React.ReactNode;
   size?: number;
   revealSize?: number;
+  maskTransitionDuration?: number;
+  maskTransitionDelay?: number;
+  fadeTransitionDuration?: number;
+  fadeTransitionDelay?: number;
   className?: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -153,16 +161,21 @@ export const MaskContainer = ({
       onMouseLeave={() => !isMobile && setIsHovered(false)}
     >
       <motion.div
-        className="absolute flex h-full w-full items-center justify-center bg-white text-6xl [mask-image:url(/mask.svg)] [mask-repeat:no-repeat] [mask-size:40px]"
-        animate={{
+        className="absolute flex h-full w-full items-center justify-center bg-white text-6xl [mask-image:url(/mask.svg)] [mask-repeat:no-repeat]"
+        style={{
+          // @ts-ignore
           maskPosition: `${mousePosition.x - maskSize / 2}px ${mousePosition.y - maskSize / 2}px`,
           maskSize: `${maskSize}px`,
         }}
-        transition={{
-          maskSize: { duration: 0.3, ease: "easeInOut" },
+        animate={{
+          maskSize: maskSize,
         }}
-        style={{
-          maskPosition: `${mousePosition.x - maskSize / 2}px ${mousePosition.y - maskSize / 2}px`,
+        transition={{
+          maskSize: {
+            duration: maskTransitionDuration,
+            delay: maskTransitionDelay,
+            ease: "easeInOut",
+          },
         }}
       >
         <div className="absolute inset-0 z-0 h-full w-full bg-white" />
@@ -174,7 +187,13 @@ export const MaskContainer = ({
       <motion.div 
         className="flex h-full w-full items-center justify-center"
         animate={{ opacity: isHovered ? 0 : 1 }}
-        transition={{ opacity: { duration: 0.3, ease: "easeInOut" } }}
+        transition={{
+          opacity: {
+            duration: fadeTransitionDuration,
+            delay: fadeTransitionDelay,
+            ease: "easeInOut",
+          },
+        }}
       >
         {revealText}
       </motion.div>

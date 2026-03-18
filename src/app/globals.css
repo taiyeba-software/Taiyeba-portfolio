@@ -40,7 +40,9 @@
 }
 
 @theme inline {
-  --font-sans: 'Inter', 'Inter Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), 'Inter Fallback', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-sora), var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-display-alt: var(--font-space-grotesk), var(--font-sora), ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', 'JetBrains Mono Fallback', ui-monospace, monospace;
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -70,10 +72,69 @@
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+}
+
+@layer utilities {
+  .font-embed-code {
+    font-family: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-optical-sizing: auto;
+  }
+
+  .type-h1 {
+    @apply font-heading text-4xl font-semibold tracking-tight leading-tight text-foreground sm:text-5xl lg:text-6xl;
+  }
+
+  .type-h2 {
+    @apply font-heading text-2xl font-semibold tracking-tight leading-tight text-foreground sm:text-3xl lg:text-4xl;
+  }
+
+  .type-h3 {
+    @apply font-heading text-xl font-semibold tracking-tight leading-tight text-foreground sm:text-2xl;
+  }
+
+  .type-h4 {
+    @apply font-heading text-lg font-medium tracking-tight leading-snug text-foreground sm:text-xl;
+  }
+
+  .type-body {
+    @apply text-sm leading-relaxed text-foreground sm:text-base;
+  }
+
+  .type-small {
+    @apply text-xs leading-relaxed text-muted-foreground sm:text-sm;
+  }
+
+  .type-label {
+    @apply text-xs font-medium uppercase tracking-wide text-muted-foreground;
+  }
+
+  .type-accent {
+    @apply font-medium text-primary;
+  }
+
+  .type-prose {
+    @apply max-w-2xl;
+  }
+
+  .type-responsive-align {
+    @apply text-center md:text-left;
+  }
 }

@@ -1,4 +1,3 @@
-import { aboutData } from '@/lib/data'
 import { MaskContainer } from '@/components/ui/svg-mask-effect'
 
 export function About() {
@@ -11,29 +10,20 @@ export function About() {
   )
 
   const fullAboutText = (
-    <div className="mx-auto max-w-4xl">
+    <div className="mx-auto max-w-2xl">
       <h3 className="mb-8 bg-gradient-to-r from-[#00FFB3] via-[#0077FF] to-[#00FFB3] bg-clip-text text-center font-sans text-3xl font-bold tracking-tight text-transparent drop-shadow-[0_0_12px_rgba(0,255,179,0.6)] sm:text-4xl">
         About Me
       </h3>
-      <p className="mb-6 text-left font-sans text-base leading-relaxed text-black drop-shadow-[0_1px_4px_rgba(0,255,179,0.3)]">
-        I'm a <span className="font-bold text-[#00FFB3] drop-shadow-[0_0_8px_rgba(0,255,179,0.5)]">Full-Stack Developer</span> focused on building performant,
-        scalable products with clean architecture and thoughtful user experience.
-      </p>
       <div className="space-y-4 text-left font-sans">
-        {aboutData.paragraphs.map((paragraph, index) => {
-          const highlighted = paragraph
-            .replace('React', '<span class="font-mono font-bold text-[#0077FF] drop-shadow-[0_0_6px_rgba(0,119,255,0.5)]">React</span>')
-            .replace('Next.js', '<span class="font-mono font-bold text-[#0077FF] drop-shadow-[0_0_6px_rgba(0,119,255,0.5)]">Next.js</span>')
-            .replace('Node.js', '<span class="font-mono font-bold text-[#0077FF] drop-shadow-[0_0_6px_rgba(0,119,255,0.5)]">Node.js</span>')
-
-          return (
-            <p
-              key={index}
-              className="text-base leading-relaxed text-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.2)]"
-              dangerouslySetInnerHTML={{ __html: highlighted }}
-            />
-          )
-        })}
+        <p className="text-base leading-relaxed text-black drop-shadow-[0_1px_3px_rgba(0,0,0,0.2)]">
+          I’m a Computer Science & Engineering student and full-stack developer focused on building structured, scalable digital systems. My academic background in CSE introduced me to software engineering, and hands-on projects helped me turn theory into production-ready skills.
+        </p>
+        <p className="text-base leading-relaxed text-black/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.2)]">
+          I work primarily with the MERN stack and Next.js, building applications that go beyond UI — including authentication, modular backend layers, cloud deployment, and real-world debugging considerations. I’m especially interested in how APIs, databases, caching layers, and services connect in real systems.
+        </p>
+        <p className="text-base leading-relaxed text-black/80 drop-shadow-[0_1px_3px_rgba(0,0,0,0.2)]">
+          Alongside full-stack development, I’m exploring applied AI systems. My final-year research project focuses on early emotional signal detection in Bangla code-mixed social media text, combining NLP fundamentals with responsible system design.
+        </p>
       </div>
     </div>
   )
@@ -45,6 +35,10 @@ export function About() {
     >
       <MaskContainer
         revealText={teaserText}
+        maskTransitionDuration={0.55}
+        maskTransitionDelay={0.08}
+        fadeTransitionDuration={0.55}
+        fadeTransitionDelay={0.08}
         className="min-h-svh w-full bg-black text-white dark:text-black"
       >
         {fullAboutText}

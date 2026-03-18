@@ -1,6 +1,6 @@
 import { siteConfig } from '@/lib/data'
 import { Mail, Github, Linkedin, FileText } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+// import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 
 export function Contact() {
@@ -9,11 +9,11 @@ export function Contact() {
       <div className="mx-auto max-w-2xl">
         <div className="rounded-2xl border border-border/40 bg-white/5 backdrop-blur px-6 sm:px-8 py-12">
           <div className="text-center">
-            <h2 className="mb-2 font-mono text-sm text-muted-foreground">{'// contact'}</h2>
-            <h3 className="mb-6 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-3xl font-semibold text-transparent sm:text-4xl">
+            {/* <h2 className="mb-2 font-mono text-sm text-muted-foreground">{'// contact'}</h2> */}
+            <h3 className="type-h2 mb-6 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-transparent">
               Get in Touch
             </h3>
-            <p className="mx-auto mb-10 max-w-lg text-base leading-relaxed text-muted-foreground text-pretty">
+            <p className="type-body mx-auto mb-10 max-w-lg text-muted-foreground text-pretty">
               I&apos;m actively seeking internship roles where I can learn, contribute meaningfully, and strengthen my engineering fundamentals.
             </p>
           </div>
@@ -21,7 +21,9 @@ export function Contact() {
           {/* Primary CTA */}
           <div className="mb-6 flex justify-center">
             <a
-              href={`mailto:${siteConfig.email}`}
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=islamtaiyeba38@gmail.com&su=Internship%20Opportunity&body=Hi%20Taiyeba,%0A%0AI%20would%20like%20to%20connect%20regarding%20an%20opportunity.%0A"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3 text-sm font-medium text-primary-foreground transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-8px_hsl(var(--primary)/0.35)]"
             >
               <Mail className="h-4 w-4" />
@@ -50,7 +52,7 @@ export function Contact() {
               GitHub
             </Link>
             <Link
-              href="/resume.pdf"
+              href="/interview strategy.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg border border-border/50 bg-white/3 px-5 py-2.5 text-sm font-medium text-foreground transition-all hover:bg-white/8 hover:border-primary/50 hover:shadow-[0_12px_32px_-8px_hsl(var(--primary)/0.2)]"

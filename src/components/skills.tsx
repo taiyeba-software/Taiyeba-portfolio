@@ -30,7 +30,7 @@ export function Skills() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-16">
           {/* <h2 className="mb-2 text-center font-mono text-sm text-muted-foreground">{'// skills'}</h2> */}
-          <h3 className="mb-12 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-center text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
+          <h3 className="type-h2 mb-12 bg-gradient-to-r from-primary via-primary/80 to-primary/60 bg-clip-text text-center text-transparent">
             Skills & Expertise
           </h3>
 
@@ -50,19 +50,19 @@ export function Skills() {
                       <div className="rounded-lg bg-primary/10 p-2.5 text-primary transition-all duration-300 group-hover:bg-primary/20">
                         {iconMap[cluster.icon]}
                       </div>
-                      <h4 className="text-lg font-bold leading-snug text-foreground pt-1">
+                      <h4 className="type-h4 pt-1">
                         {cluster.title}
                       </h4>
                     </div>
 
                     {/* Description */}
-                    <p className="text-sm leading-relaxed text-muted-foreground">
+                    <p className="type-body text-muted-foreground">
                       {cluster.description}
                     </p>
 
                     {/* Technologies (comma-separated) */}
                     <div className="border-t border-border/30 pt-3">
-                      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground mb-2">
+                      <p className="type-label mb-2">
                         Tech Stack
                       </p>
                       <p className="text-sm text-foreground/85 leading-relaxed">
@@ -80,7 +80,7 @@ export function Skills() {
         <div className="rounded-2xl border border-border/40 bg-white/5 backdrop-blur px-6 sm:px-8 py-8 sm:py-10">
           <div className="mb-6 flex items-center gap-3">
             <Lightbulb className="h-5 w-5 text-primary" />
-            <h4 className="text-xl font-semibold leading-snug text-foreground">
+            <h4 className="type-h4">
               Engineering Foundations
             </h4>
           </div>
@@ -92,7 +92,7 @@ export function Skills() {
                   'group rounded-lg border border-border/50 bg-white/3 px-4 py-3 transition-all duration-300 hover:border-primary/40 hover:bg-white/8 hover:shadow-[0_8px_20px_-12px_hsl(var(--primary)/0.25)]'
                 )}
               >
-                <p className="text-sm font-medium leading-relaxed text-foreground/90 group-hover:text-foreground">
+                <p className="type-body font-medium text-foreground/90 group-hover:text-foreground">
                   {item}
                 </p>
               </div>

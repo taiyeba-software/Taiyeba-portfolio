@@ -13,7 +13,7 @@ export function Projects() {
     <section id="projects" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
         {/* <h2 className="mb-2 text-center font-mono text-sm text-muted-foreground">{'// projects'}</h2> */}
-        <h3 className="mb-12 text-center text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+        <h3 className="type-h2 mb-12 text-center">
           My Work
         </h3>
 
@@ -43,7 +43,7 @@ export function Projects() {
                     )}
                   >
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                      <p className="type-label">
                         {project.company}
                       </p>
                       {project.status === 'Live' && (
@@ -65,15 +65,15 @@ export function Projects() {
                     </div>
 
                     <div className="space-y-2">
-                      <h4 className="text-lg font-bold leading-snug text-foreground sm:text-xl">
+                      <h4 className="type-h4 sm:text-xl">
                         {project.title}
                       </h4>
-                      <p className="text-base font-semibold leading-snug text-primary sm:text-lg">
+                      <p className="type-accent text-base leading-snug sm:text-lg">
                         {project.subtitle}
                       </p>
                     </div>
 
-                    <p className="text-sm leading-relaxed text-muted-foreground">
+                    <p className="type-body text-muted-foreground">
                       {project.description}
                     </p>
 

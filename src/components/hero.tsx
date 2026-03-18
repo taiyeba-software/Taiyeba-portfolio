@@ -2,6 +2,12 @@ import { siteConfig } from "@/lib/data";
 import { ArrowDown, Download, Github, Linkedin, Twitter } from "lucide-react";
 import { GlareCardHero } from "@/components/glare-card-hero";
 import Image from "next/image";
+import { M_PLUS_Code_Latin } from "next/font/google";
+
+const mPlusCodeLatin = M_PLUS_Code_Latin({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 export function Hero() {
   return (
@@ -12,14 +18,14 @@ export function Hero() {
       <GlareCardHero>
 
         <div className="flex min-h-svh items-center px-6 sm:px-10 lg:px-20 pt-20 sm:pt-16 md:pt-0">
-            <div className="mx-auto grid w-full max-w-7xl grid-cols-1 md:grid-cols-[7fr_3fr] gap-0 md:gap-0 items-center">
+            <div className="mx-auto grid w-full max-w-7xl grid-cols-1 md:grid-cols-2 items-center">
 
               {/* Left side */}
               <div className="flex flex-col items-center text-center md:items-start md:text-left">
 
                 {/* Main Statement */}
-                  <h1 className="mb-8 max-w-3xl text-3xl font-medium leading-[1.15] tracking-tight text-[hsl(var(--foreground))] sm:text-4xl lg:text-5xl xl:text-6xl">
-                    I design and <span className="font-mono font-normal">develop()</span>{" "}
+                  <h1 className="type-h1 mb-8 max-w-3xl xl:text-6xl">
+                    I design and <span className="font-light text-primary" style={{ fontFamily: mPlusCodeLatin.style.fontFamily }}>develop()</span>{" "}
                     <span className="font-semibold">
                       products, shape meaningful brands, and build + lead inspired,
                       talented teams.
@@ -27,24 +33,22 @@ export function Hero() {
                   </h1>
 
                   {/* Subline */}
-                  <p className="max-w-md text-sm leading-relaxed text-[hsl(var(--muted-foreground))] sm:text-base">
+                  <p className="type-body max-w-md text-[hsl(var(--muted-foreground))]">
                     Full‑stack developer focused on clean architecture, scalable systems,
                     and thoughtful digital experiences.
                   </p>
               </div>
 
               {/* Right side — 30% width */}
-              <div className="relative flex items-center justify-center md:justify-end h-full">
-                <div className="relative h-72 w-56 sm:h-96 sm:w-72 md:h-[420px] md:w-[340px] lg:h-[660px] lg:w-[440px] overflow-hidden rounded-lg">
-                  <Image
-                    src="/images/profile.png"
-                    alt="Profile photo"
-                    fill
-                    className="object-cover object-center grayscale"
-                    priority
-                    sizes="(max-width: 640px) 224px, (max-width: 768px) 288px, (max-width: 1024px) 340px, 420px"
-                  />
-                </div>
+              <div className="relative flex items-center justify-center md:justify-end m-[10px]">
+                <Image
+                  src="/images/profile.png"
+                  alt="Profile photo"
+                  width={440}
+                  height={660}
+                  className="w-full max-w-[590px] lg:max-w-[600px] h-auto object-contain grayscale"
+                  priority
+                />
               </div>
 
             </div>
